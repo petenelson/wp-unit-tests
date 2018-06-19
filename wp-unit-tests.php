@@ -7,12 +7,12 @@
  * Plugin URI: https://github.com/petenelson/wp-unit-tests
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+// if ( ! defined( 'ABSPATH' ) ) {
+// 	exit;
+// }
 
 // Load the plugin.
-require_once trailingslashit( dirname( __FILE__ ) ) . 'includes/plugin.php';
+require_once dirname( __FILE__ ) . '/includes/plugin.php';
 
 // Register the plugin.
 \WPAustin\WPUnitTests\register();

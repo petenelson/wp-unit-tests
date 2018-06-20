@@ -28,7 +28,7 @@ class WPAustin_WordPress_Unit_Tests {
 		if ( empty( $wp_develop_dir ) ) {
 			throw new Exception(
 				'ERROR' . PHP_EOL . PHP_EOL .
-				'You must define the WP_TESTS_DIR environment variable.' . PHP_EOL
+				'You must define the WP_DEVELOP_DIR environment variable.' . PHP_EOL
 			);
 		}
 

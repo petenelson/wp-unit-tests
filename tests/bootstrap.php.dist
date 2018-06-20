@@ -1,6 +1,6 @@
 <?php
 
-class PN_WordPress_Unit_Tests {
+class WPAustin_WordPress_Unit_Tests {
 
 	protected $_includes = array(
 	);
@@ -12,11 +12,7 @@ class PN_WordPress_Unit_Tests {
 	 */
 	public function __construct() {
 
-		$_tests_dir  = '';
-		if ( ! is_dir( $_tests_dir ) ) {
-			$_tests_dir = getenv( 'WP_TESTS_DIR' );
-		}
-
+		$wp_develop_dir = getenv( 'WP_DEVELOP_DIR' );
 		$root = dirname( __FILE__, 2 );
 
 		// Load the composer autoload.
@@ -29,8 +25,8 @@ class PN_WordPress_Unit_Tests {
 
 		$autoloader = require $root . '/vendor/autoload.php';
 
-		if ( empty( $_tests_dir ) ) {
-			throw new PHPUnit_Framework_Exception(
+		if ( empty( $wp_develop_dir ) ) {
+			throw new Exception(
 				'ERROR' . PHP_EOL . PHP_EOL .
 				'You must define the WP_TESTS_DIR environment variable.' . PHP_EOL
 			);
@@ -40,7 +36,7 @@ class PN_WordPress_Unit_Tests {
 		$this->load_plugin();
 
 		// Start up the WP testing environment.
-		require $_tests_dir . '/includes/bootstrap.php';
+		require $wp_develop_dir . '/tests/phpunit/includes/bootstrap.php';
 	}
 
 	/**
@@ -56,4 +52,4 @@ class PN_WordPress_Unit_Tests {
 	}
 }
 
-new PN_WordPress_Unit_Tests();
+new WPAustin_WordPress_Unit_Tests();

@@ -7,10 +7,6 @@
  * Plugin URI: https://github.com/petenelson/wp-unit-tests
  */
 
-// if ( ! defined( 'ABSPATH' ) ) {
-// 	exit;
-// }
-
 // Load the plugin.
 require_once dirname( __FILE__ ) . '/includes/plugin.php';
 

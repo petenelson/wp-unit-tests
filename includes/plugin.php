@@ -2,11 +2,9 @@
 
 namespace WPAustin\WPUnitTests;
 
-
 function register() {
-
 	add_action( 'add_meta_boxes', __NAMESPACE__ . '\register_byline_meta_box' );
-
+	add_action( 'save_post', __NAMESPACE__ . '\save_byline_meta_box' );
 }
 
 function get_byline_meta_key() {

@@ -32,23 +32,20 @@ class WPAustin_WordPress_Unit_Tests {
 			);
 		}
 
-		// Load the plugin.
-		$this->load_plugin();
+		// Give access to tests_add_filter() function.
+		require_once $wp_develop_dir . '/tests/phpunit/includes/functions.php';
+
+		tests_add_filter( 'muplugins_loaded', [ $this, 'manually_load_plugin' ] );
 
 		// Start up the WP testing environment.
 		require $wp_develop_dir . '/tests/phpunit/includes/bootstrap.php';
 	}
 
 	/**
-	 * Loads the required files for the plugin.
-	 *
-	 * @return void
+	 * Manually load the plugin being tested.
 	 */
-	private function load_plugin() {
-		$root = dirname( __FILE__, 2 );
-		foreach ( $this->_includes as $include ) {
-			require_once $root . "/includes/{$include}.php";
-		}
+	public function manually_load_plugin() {
+		require dirname( dirname( __FILE__ ) ) . '/wp-unit-tests.php';
 	}
 }
 

@@ -2,15 +2,35 @@
 
 namespace WPAustin\WPUnitTests;
 
+/**
+ * Register plugin hooks and filters.
+ *
+ * @return void
+ */
 function register() {
-	add_action( 'add_meta_boxes', __NAMESPACE__ . '\register_byline_meta_box' );
-	add_action( 'save_post', __NAMESPACE__ . '\save_byline_meta_box' );
+	if ( ! has_action( 'add_meta_boxes', __NAMESPACE__ . '\register_byline_meta_box' ) ) {
+		add_action( 'add_meta_boxes', __NAMESPACE__ . '\register_byline_meta_box' );
+	}
+
+	if ( ! has_action( 'save_post', __NAMESPACE__ . '\save_byline_meta_box' ) ) {
+		add_action( 'save_post', __NAMESPACE__ . '\save_byline_meta_box' );
+	}
 }
 
+/**
+ * Returns the meta key used for storing bylines
+ *
+ * @return string
+ */
 function get_byline_meta_key() {
 	return 'wp_austin_byline';
 }
 
+/**
+ * Returns the form nonce field name for the meta box.
+ *
+ * @return string
+ */
 function get_byline_nonce_field() {
 	return 'wp_austin_byline_nonce';
 }

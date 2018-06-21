@@ -2,7 +2,9 @@
 	bootstrap="tests/bootstrap.php.dist"
 	backupGlobals="false"
 	processIsolation="false"
-	colors="false">
+	colors="true"
+	verbose="true"
+	>
 	<testsuites>
 		<testsuite name="wp-unit-tests">
 			<directory suffix=".php">tests/phpunit</directory>

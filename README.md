@@ -2,8 +2,9 @@
 
 This sample plugin contains a basic meta box for storing a byline, as well as unit tests for testing the entire plugin.
 
-## Local Setup
+## Local Setup (Mac)
 
+* Clone this repo locally: `git clone git@github.com:petenelson/wp-unit-tests.git`
 * Check your PHP version in your terminal `php --version`. Unit tests need PHP 7, [in case you need to upgrade](https://medium.com/zenchef-tech-and-product/how-to-upgrade-your-version-of-php-to-7-0-on-macos-sierra-e1bfdea55a63).
 * Additional info for the following: [https://foresthoffman.com/running-wordpress-phpunit-tests-with-docker/](https://foresthoffman.com/running-wordpress-phpunit-tests-with-docker/)
 * Switch back to the plugin dir and run `composer install` to install PHPUnit.

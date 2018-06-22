@@ -4,8 +4,14 @@ This sample plugin contains a basic meta box for storing a byline, as well as un
 
 ## Local Setup
 
-TODO Fill this in
-
+* Check your PHP version in your terminal `php --version`. Unit tests need PHP 7, [in case you need to upgrade](https://medium.com/zenchef-tech-and-product/how-to-upgrade-your-version-of-php-to-7-0-on-macos-sierra-e1bfdea55a63).
+* Additional info for the following: [https://foresthoffman.com/running-wordpress-phpunit-tests-with-docker/](https://foresthoffman.com/running-wordpress-phpunit-tests-with-docker/)
+* Switch back to the plugin dir and run `composer install` to install PHPUnit.
+* Make a new folder and clone the WordPress develop repo: `git clone git@github.com:WordPress/wordpress-develop.git`
+* Set the environment variable, example: `export WP_DEVELOP_DIR="/Users/petenelson/projects/wordpress/wordpress-develop/"`
+* For a database, I recommend [Docker](https://www.docker.com/) so you don't interfere with any existing database servers.
+* Switch to the /docker folder and run `docker-compose up -d` to start the MySQL test database.
+* Switch back to the main plugin dir and run `./vendor/bin/phpunit` to run the unit tests.
 
 ## Travis CI
 

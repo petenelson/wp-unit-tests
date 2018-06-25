@@ -81,8 +81,21 @@ function display_byline_meta_box( $post ) {
 	<?php
 }
 
-function save_byline_meta_box() {
-	// TODO
+/**
+ * Save the meta box details.
+ *
+ * @param  int $post_id The post ID.
+ * @return void
+ */
+function save_byline_meta_box( $post_id ) {
+
+	$data = filter_var_array( $_POST, [
+			get_byline_nonce_field() => FILTER_SANITIZE_STRING,
+			'wp_austin_byline' => FILTER_SANITIZE_STRING,
+		]
+	);
+
+	update_post_meta( $post_id, get_byline_meta_key(), $data['wp_austin_byline'] );
 }
 
 function filter_post_author() {

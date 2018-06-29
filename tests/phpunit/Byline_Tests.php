@@ -70,6 +70,7 @@ class Byline_Tests extends WP_UnitTestCase {
 		\WPAustin\WPUnitTests\display_byline_meta_box( $post );
 		$html = ob_get_clean();
 
+		// Verify we have a nonce.
 		$nonce = wp_create_nonce( \WPAustin\WPUnitTests\get_byline_meta_key() );
 		$this->assertContains( 'value="' . $nonce . '"', $html );
 
@@ -135,6 +136,6 @@ class Byline_Tests extends WP_UnitTestCase {
 		// Verify the the author name is in the input field.
 		$this->assertContains( 'value="Clyde Nelson, The Best Boxer Dog Ever"', $html );
 
-		// What about 
+		// What about the author name?
 	}
 }

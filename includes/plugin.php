@@ -110,7 +110,10 @@ function save_byline_meta_box( $post_id ) {
  * @return string.
  */
 function filter_the_author( $author ) {
-	// TODO
+	// $byline = get_byline( get_the_ID() );
+	// if ( ! empty( $byline ) ) {
+	// 	$author = $byline;
+	// }
 
 	return $author;
 }

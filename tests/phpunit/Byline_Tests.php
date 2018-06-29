@@ -108,6 +108,8 @@ class Byline_Tests extends WP_UnitTestCase {
 
 	public function test_full_meta_box() {
 
+		\WPAustin\WPUnitTests\register();
+
 		// Create a post.
 		$post_id = wp_insert_post( [
 				'post_type' => 'post',
@@ -137,5 +139,12 @@ class Byline_Tests extends WP_UnitTestCase {
 		$this->assertContains( 'value="Clyde Nelson, The Best Boxer Dog Ever"', $html );
 
 		// What about the author name?
+		global $post;
+		$post = get_post( $post_id );
+		setup_postdata( $post );
+
+		$author_name = get_the_author();
+
+		$this->assertEquals( 'Clyde Nelson, The Best Boxer Dog Ever', $author_name );
 	}
 }

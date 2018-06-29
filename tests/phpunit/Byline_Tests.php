@@ -47,6 +47,36 @@ class Byline_Tests extends WP_UnitTestCase {
 		$this->assertEquals( 'WPAustin\WPUnitTests\display_byline_meta_box', $wp_meta_boxes['post']['advanced']['default']['wp_austin_byline']['callback'] );
 	}
 
+	public function test_display_byline_meta_box() {
+
+		\WPAustin\WPUnitTests\register();
+
+		// Create a post.
+		$post_id = wp_insert_post( [
+				'post_type' => 'post',
+				'post_status' => 'auto-draft',
+				'post_title' => 'test_do_meta_boxes',
+			], true
+		);
+
+		// Verify the post was created,
+		$this->assertGreaterThan( 0, $post_id );
+
+		$post = get_post( $post_id );
+
+		// Now render the registered meta boxes.
+		ob_start();
+		\WPAustin\WPUnitTests\display_byline_meta_box( $post );
+		$html = ob_get_clean();
+
+		$nonce = wp_create_nonce( \WPAustin\WPUnitTests\get_byline_meta_key() );
+		$this->assertContains( 'value="' . $nonce . '"', $html );
+
+		// What else should we test?
+
+		// Live coding here.
+	}
+
 	public function test_get_byline() {
 
 		// Create a post.
@@ -72,5 +102,37 @@ class Byline_Tests extends WP_UnitTestCase {
 		update_post_meta( $post_id, \WPAustin\WPUnitTests\get_byline_meta_key(), 'test_get_byline' );
 		$byline = \WPAustin\WPUnitTests\get_byline( $post_id );
 		$this->assertEquals( 'test_get_byline', $byline );
+	}
+
+	public function test_full_meta_box() {
+
+		// Create a post.
+		$post_id = wp_insert_post( [
+				'post_type' => 'post',
+				'post_status' => 'auto-draft',
+				'post_title' => 'test_full_meta_box',
+			], true
+		);
+
+		// Verify the post was created,
+		$this->assertGreaterThan( 0, $post_id );
+		
+
+		// Setup the POST variables.
+		$_POST = [
+			\WPAustin\WPUnitTests\get_byline_nonce_field() => wp_create_nonce( \WPAustin\WPUnitTests\get_byline_meta_key() ),
+			'wp_austin_byline' => 'Clyde Nelson, The Best Boxer Dog Ever',
+		];
+
+		// Save the meta box.
+		\WPAustin\WPUnitTests\save_byline_meta_box( $post_id );
+
+		// Render the meta box.
+		ob_start();
+		\WPAustin\WPUnitTests\display_byline_meta_box( get_post( $post_id ) );
+		$html = ob_get_clean();
+
+		// Verify the the author name is in the input field.
+		$this->assertContains( 'value="Clyde Nelson, The Best Boxer Dog Ever"', $html );
 	}
 }

@@ -15,6 +15,10 @@ function register() {
 	if ( ! has_action( 'save_post', __NAMESPACE__ . '\save_byline_meta_box' ) ) {
 		add_action( 'save_post', __NAMESPACE__ . '\save_byline_meta_box' );
 	}
+
+	if ( ! has_filter( 'the_author', __NAMESPACE__ . '\filter_the_author' ) ) {
+		add_filter( 'the_author', __NAMESPACE__ . '\filter_the_author' );
+	}
 }
 
 /**
@@ -95,9 +99,18 @@ function save_byline_meta_box( $post_id ) {
 		]
 	);
 
-	update_post_meta( $post_id, get_byline_meta_key(), $data['wp_austin_byline'] );
+	if ( wp_verify_nonce( $data[ get_byline_nonce_field() ], get_byline_meta_key() ) ) {
+		update_post_meta( $post_id, get_byline_meta_key(), $data['wp_austin_byline'] );
+	}
 }
 
-function filter_post_author() {
+/**
+ * Filter the author name.
+ *
+ * @return string.
+ */
+function filter_the_author( $author ) {
 	// TODO
+
+	return $author;
 }

@@ -105,15 +105,15 @@ function save_byline_meta_box( $post_id ) {
 }
 
 /**
- * Filter the author name.
+ * Filter the author name of the current post to return a byline.
  *
  * @return string.
  */
 function filter_the_author( $author ) {
-	// $byline = get_byline( get_the_ID() );
-	// if ( ! empty( $byline ) ) {
-	// 	$author = $byline;
-	// }
+	$byline = get_byline( get_the_ID() );
+	if ( ! empty( $byline ) ) {
+		$author = $byline;
+	}
 
 	return $author;
 }

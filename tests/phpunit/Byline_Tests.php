@@ -121,30 +121,9 @@ class Byline_Tests extends WP_UnitTestCase {
 		// Verify the post was created,
 		$this->assertGreaterThan( 0, $post_id );
 		
-		// Setup the POST variables that the form would be submitting.
-		$_POST = [
-			\WPAustin\WPUnitTests\get_byline_nonce_field() => wp_create_nonce( \WPAustin\WPUnitTests\get_byline_meta_key() ),
-			'wp_austin_byline' => 'Clyde Nelson, The Best Boxer Dog Ever',
-		];
+		// What should we do here?
 
-		// Save the meta box.
-		\WPAustin\WPUnitTests\save_byline_meta_box( $post_id );
 
-		// Render the meta box.
-		ob_start();
-		\WPAustin\WPUnitTests\display_byline_meta_box( get_post( $post_id ) );
-		$html = ob_get_clean();
 
-		// Verify the the author name is in the input field.
-		$this->assertContains( 'value="Clyde Nelson, The Best Boxer Dog Ever"', $html );
-
-		// What about the author name?
-		global $post;
-		$post = get_post( $post_id );
-		setup_postdata( $post );
-
-		$author_name = get_the_author();
-
-		$this->assertEquals( 'Clyde Nelson, The Best Boxer Dog Ever', $author_name );
 	}
 }

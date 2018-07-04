@@ -100,20 +100,26 @@ function save_byline_meta_box( $post_id ) {
 	);
 
 	if ( wp_verify_nonce( $data[ get_byline_nonce_field() ], get_byline_meta_key() ) ) {
-		update_post_meta( $post_id, get_byline_meta_key(), $data['wp_austin_byline'] );
+		if ( ! empty( $data['wp_austin_byline'] ) ) {
+			update_post_meta( $post_id, get_byline_meta_key(), $data['wp_austin_byline'] );
+		} else {
+			delete_post_meta( $post_id, get_byline_meta_key() );
+		}
 	}
 }
 
 /**
  * Filter the author name of the current post to return a byline.
  *
+ * @param string $author Default author name.
  * @return string.
  */
 function filter_the_author( $author ) {
-	$byline = get_byline( get_the_ID() );
-	if ( ! empty( $byline ) ) {
-		$author = $byline;
-	}
+
+	// $byline = get_byline( get_the_ID() );
+	// if ( ! empty( $byline ) ) {
+	// 	$author = $byline;
+	// }
 
 	return $author;
 }

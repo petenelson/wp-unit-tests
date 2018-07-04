@@ -116,10 +116,10 @@ function save_byline_meta_box( $post_id ) {
  */
 function filter_the_author( $author ) {
 
-	// $byline = get_byline( get_the_ID() );
-	// if ( ! empty( $byline ) ) {
-	// 	$author = $byline;
-	// }
+	$byline = get_byline( get_the_ID() );
+	if ( ! empty( $byline ) ) {
+		$author = $byline;
+	}
 
 	return $author;
 }

@@ -75,8 +75,11 @@ class Byline_Tests extends WP_UnitTestCase {
 		$this->assertContains( 'value="' . $nonce . '"', $html );
 
 		// What else should we test?
-
 		// Live coding here.
+
+
+
+
 	}
 
 	public function test_get_byline() {
@@ -108,6 +111,8 @@ class Byline_Tests extends WP_UnitTestCase {
 
 	public function test_full_meta_box() {
 
+		\WPAustin\WPUnitTests\register();
+
 		// Create a post.
 		$post_id = wp_insert_post( [
 				'post_type' => 'post',
@@ -136,6 +141,30 @@ class Byline_Tests extends WP_UnitTestCase {
 		// Verify the the author name is in the input field.
 		$this->assertContains( 'value="Clyde Nelson, The Best Boxer Dog Ever"', $html );
 
-		// What about the author name?
+		// What about the author name filter?
+		global $post;
+		$post = get_post( $post_id );
+		setup_postdata( $post );
+
+		$author_name = get_the_author();
+
+		$this->assertEquals( 'Clyde Nelson, The Best Boxer Dog Ever', $author_name );
+
+
+
+		// Setup the POST variables that the form would be submitting again, but no byline.
+		$_POST = [
+			\WPAustin\WPUnitTests\get_byline_nonce_field() => wp_create_nonce( \WPAustin\WPUnitTests\get_byline_meta_key() ),
+			'wp_austin_byline' => '',
+		];
+
+		// Save the meta box.
+		\WPAustin\WPUnitTests\save_byline_meta_box( $post_id );
+
+		// Check the post meta to verify it is empty.
+		$this->assertEmpty( get_post_meta( $post_id, \WPAustin\WPUnitTests\get_byline_nonce_field(), true ) );
+
+
+
 	}
 }

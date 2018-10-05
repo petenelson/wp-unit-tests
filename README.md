@@ -1,3 +1,4 @@
+
 # WP Austin - WordPress Unit Testing
 
 This sample plugin contains a basic meta box for storing a byline, as well as unit tests for testing the entire plugin.
@@ -8,8 +9,8 @@ This sample plugin contains a basic meta box for storing a byline, as well as un
 * Additional info for the following: [https://foresthoffman.com/running-wordpress-phpunit-tests-with-docker/](https://foresthoffman.com/running-wordpress-phpunit-tests-with-docker/)
 * Make a new directory and clone the WordPress develop repo: `git clone git@github.com:WordPress/wordpress-develop.git`
 * Inside the root of the cloned wordpress-develop directory, copy the wp-tests-config-sample.php file to wp-tests-config.php and modify the DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, and WP_TESTS_DOMAIN, example: 
-	* ```
-define( 'DB_NAME', 'wordpress' );
+
+```define( 'DB_NAME', 'wordpress' );
 define( 'DB_USER', 'root' );
 define( 'DB_PASSWORD', 'password' );
 define( 'DB_HOST', '127.0.0.1:3308' ); // Match the port number to Docker.
